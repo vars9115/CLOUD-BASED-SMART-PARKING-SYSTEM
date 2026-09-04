@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Parking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h2>Book Parking Slot {{ slot.name }}</h2>
+
+    <form method="POST">
+
+        <label>Vehicle Number</label>
+
+        <input type="text"
+               name="vehicle"
+               placeholder="TN01AB1234"
+               required>
+
+        <label>Date</label>
+
+        <input type="date"
+               name="date"
+               required>
+
+        <label>Time</label>
+
+        <input type="time"
+               name="time"
+               required>
+
+        <button type="submit" class="btn">
+            Confirm Booking
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

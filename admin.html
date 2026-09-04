@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🚗 Admin Dashboard</h2>
+    <a href="/">Home</a>
+</nav>
+
+<div class="container">
+
+    <h1>Parking Management</h1>
+
+    <div class="slot-container">
+
+        {% for slot in slots %}
+
+        <div class="slot">
+
+            <h2>{{ slot.name }}</h2>
+
+            <p>Status: <b>{{ slot.status }}</b></p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <h2>All Bookings</h2>
+
+    <table>
+
+        <tr>
+            <th>User</th>
+            <th>Slot</th>
+            <th>Vehicle</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+
+        {% for booking in bookings %}
+
+        <tr>
+            <td>{{ booking.user }}</td>
+            <td>{{ booking.slot }}</td>
+            <td>{{ booking.vehicle }}</td>
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.time }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

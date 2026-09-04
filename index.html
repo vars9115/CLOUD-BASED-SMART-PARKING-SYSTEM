@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud-Based Smart Parking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🚗 Smart Parking</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/admin">Admin</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Cloud-Based Smart Parking System</h1>
+    <p>Find and book your parking slot easily.</p>
+
+    <a href="/parking-slots" class="btn">
+        Find Parking
+    </a>
+</section>
+
+<section class="container">
+
+    <h2>Parking Availability</h2>
+
+    <div class="slot-container">
+
+        {% for slot in slots %}
+
+        <div class="slot {% if slot.status == 'Occupied' %}occupied{% else %}available{% endif %}">
+
+            <h3>Slot {{ slot.name }}</h3>
+
+            <p>Status: {{ slot.status }}</p>
+
+            {% if slot.status == "Available" %}
+                <a href="/booking/{{ slot.id }}" class="btn">
+                    Book Now
+                </a>
+            {% else %}
+                <button disabled>Occupied</button>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🚗 Smart Parking</h2>
+
+    <div>
+        <a href="/parking-slots">Parking Slots</a>
+        <a href="/admin">Admin</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Welcome, {{ user }} 👋</h1>
+
+    <h2>Parking Slots</h2>
+
+    <div class="slot-container">
+
+        {% for slot in slots %}
+
+        <div class="slot {% if slot.status == 'Occupied' %}occupied{% else %}available{% endif %}">
+
+            <h3>Slot {{ slot.name }}</h3>
+            <p>Status: {{ slot.status }}</p>
+
+            {% if slot.status == "Available" %}
+
+                <a href="/booking/{{ slot.id }}" class="btn">
+                    Book
+                </a>
+
+            {% else %}
+
+                <a href="/cancel/{{ slot.name }}" class="cancel">
+                    Cancel
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <h2>My Bookings</h2>
+
+    <table>
+
+        <tr>
+            <th>Slot</th>
+            <th>Vehicle</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+
+        {% for booking in bookings %}
+
+        {% if booking.user == user %}
+
+        <tr>
+            <td>{{ booking.slot }}</td>
+            <td>{{ booking.vehicle }}</td>
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.time }}</td>
+        </tr>
+
+        {% endif %}
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
